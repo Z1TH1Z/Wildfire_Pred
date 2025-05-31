@@ -9,10 +9,11 @@ data = pd.read_csv("Algerian_forest_fires_dataset.csv")
 print(data.head())
 data.isnull().sum()
 data = data.dropna()
+data['Classes'] = data['Classes'].str.strip().str.lower()
 
 from sklearn.preprocessing import LabelEncoder
 encoder = LabelEncoder()
-data['Classes'] =encoder.fit_transform(data[['Classes']])
+data['Classes'] =encoder.fit_transform(data['Classes'])
 print(data['Classes'])
 # Separate features and target variable
 X = data.drop(['Classes' , 'day' , 'month' , 'year'], axis=1)
